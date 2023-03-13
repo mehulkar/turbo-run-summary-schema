@@ -1,13 +1,23 @@
 import { environmentVariables, expandedInputs } from "./utils";
 
-interface resolvedTaskDefinition {
+export interface taskSummary {
+  taskId: string;
+  task: string;
+  package: string;
+  hash: string;
+  cacheState: {};
+  command: string;
   outputs: string[];
-  inputs: string[];
-  cache: boolean;
-  dependsOn: string[];
-  outputMode: string;
-  env: string[];
-  persistent: boolean;
+  excludedOutputs: string[];
+  logFile: string;
+  dependencies: string[];
+  dependents: string[];
+  resolvedTaskDefinition: resolvedTaskDefinition;
+  expandedInputs: expandedInputs;
+  expandedOutputs: string[];
+  framework: string;
+  environmentVariables: environmentVariables;
+  execution: taskExecutionSummary;
 }
 
 // Same as resolvedTaskDefinition, but all keys are optional. Can we combine somehow?
@@ -28,22 +38,12 @@ interface taskExecutionSummary {
   error: string | null;
 }
 
-export interface taskSummary {
-  taskId: string;
-  task: string;
-  package: string;
-  hash: string;
-  cacheState: {};
-  command: string;
+interface resolvedTaskDefinition {
   outputs: string[];
-  excludedOutputs: string[];
-  logFile: string;
-  dependencies: string[];
-  dependents: string[];
-  resolvedTaskDefinition: resolvedTaskDefinition;
-  expandedInputs: expandedInputs;
-  expandedOutputs: string[];
-  framework: string;
-  environmentVariables: environmentVariables;
-  execution: taskExecutionSummary;
+  inputs: string[];
+  cache: boolean;
+  dependsOn: string[];
+  outputMode: string;
+  env: string[];
+  persistent: boolean;
 }
